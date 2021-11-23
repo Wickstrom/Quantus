@@ -112,7 +112,7 @@ class PointingGame(Metric):
 
         # Update kwargs.
         self.nr_channels = kwargs.get("nr_channels", np.shape(x_batch)[1])
-        self.img_size = kwargs.get("img_size", np.shape(x_batch)[-1])
+        self.img_size = kwargs.get("img_size", (np.shape(x_batch)[-2], np.shape(x_batch)[-1]))
         self.kwargs = {
             **kwargs,
             **{k: v for k, v in self.__dict__.items() if k not in ["args", "kwargs"]},
@@ -141,7 +141,7 @@ class PointingGame(Metric):
 
             # Reshape.
             a = a.flatten()
-            s = s.reshape(self.img_size, self.img_size).flatten().astype(bool)
+            s = s.reshape(self.img_size[0], self.img_size[1]).flatten().astype(bool)
 
             if self.abs:
                 a = np.abs(a)
