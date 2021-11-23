@@ -199,7 +199,7 @@ class FaithfulnessCorrelation(Metric):
             self.last_results.append(self.similarity_func(a=att_sums, b=logit_deltas))
 
         self.last_results = [np.mean(self.last_results)]
-        self.all_results.append(self.last_results)
+        self.all_results.append(self.last_results[-1])
 
         return self.last_results
 
@@ -810,7 +810,7 @@ class MonotonicityNguyen(Metric):
 
             self.last_results.append(self.similarity_func(a=atts, b=vars))
 
-        self.all_results.append(self.last_results)
+        self.all_results.append(self.last_results[-1])
 
         return self.last_results
 
