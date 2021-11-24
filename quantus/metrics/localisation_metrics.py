@@ -140,7 +140,7 @@ class PointingGame(Metric):
         for sample, (x, y, a, s) in enumerate(zip(x_batch, y_batch, a_batch, s_batch)):
 
             # Reshape.
-            a = a.flatten()
+            a = a.squeeze()
             s = s.reshape(self.img_size[0], self.img_size[1]).flatten().astype(bool)
 
             if self.abs:
