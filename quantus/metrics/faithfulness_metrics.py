@@ -196,7 +196,7 @@ class FaithfulnessCorrelation(Metric):
                 # Sum attributions of the random subset.
                 att_sums.append(np.sum(a[a_ix]))
 
-             self.last_results.append(self.similarity_func(a=att_sums, b=logit_deltas))
+            self.last_results.append(self.similarity_func(a=att_sums, b=logit_deltas))
 
         self.last_results = [np.mean(self.last_results)]
         self.all_results.append(self.last_results[-1])
