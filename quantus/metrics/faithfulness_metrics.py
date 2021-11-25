@@ -577,7 +577,7 @@ class MonotonicityArya(Metric):
                 # Predict on perturbed input x (that was initially filled with a constant 'perturb_baseline' value).
                 with torch.no_grad():
                     y_pred_perturb = float(
-                        torch.nn.Softmax()(
+                        torch.nn.Softmax(dim=1)(
                             model(
                                 torch.Tensor(x_baseline)
                                 .reshape(
@@ -738,7 +738,7 @@ class MonotonicityNguyen(Metric):
             # Predict on input x.
             with torch.no_grad():
                 y_pred = float(
-                    torch.nn.Softmax()(
+                    torch.nn.Softmax(dim=1)(
                         model(
                             torch.Tensor(x)
                             .reshape(1, self.nr_channels, self.img_size, self.img_size)
@@ -785,7 +785,7 @@ class MonotonicityNguyen(Metric):
                     # Predict on perturbed input x.
                     with torch.no_grad():
                         y_pred_perturb = float(
-                            torch.nn.Softmax()(
+                            torch.nn.Softmax(dim=1)(
                                 model(
                                     torch.Tensor(x_perturbed)
                                     .reshape(
@@ -979,7 +979,7 @@ class PixelFlipping(Metric):
                 # Predict on perturbed input x.
                 with torch.no_grad():
                     y_pred_perturb = float(
-                        torch.nn.Softmax()(
+                        torch.nn.Softmax(dim=1)(
                             model(
                                 torch.Tensor(x_perturbed)
                                 .reshape(
@@ -1143,7 +1143,7 @@ class RegionPerturbation(Metric):
             with torch.no_grad():
                 y_pred = float(
                     model(
-                        torch.nn.Softmax()(
+                        torch.nn.Softmax(dim=1)(
                             torch.Tensor(x)
                             .reshape(1, self.nr_channels, self.img_size, self.img_size)
                             .to(self.kwargs.get("device", None))
@@ -1215,7 +1215,7 @@ class RegionPerturbation(Metric):
                 # Predict on perturbed input x and store the difference from predicting on unperturbed input.
                 with torch.no_grad():
                     y_pred_perturb = float(
-                        torch.nn.Softmax()(
+                        torch.nn.Softmax(dim=1)(
                             model(
                                 torch.Tensor(x_perturbed)
                                 .reshape(
@@ -1366,7 +1366,7 @@ class Selectivity(Metric):
             with torch.no_grad():
                 y_pred = float(
                     model(
-                        torch.nn.Softmax()(
+                        torch.nn.Softmax(dim=1)(
                             torch.Tensor(x)
                             .reshape(1, self.nr_channels, self.img_size, self.img_size)
                             .to(self.kwargs.get("device", None))
@@ -1426,7 +1426,7 @@ class Selectivity(Metric):
                 # Predict on perturbed input x and store the difference from predicting on unperturbed input.
                 with torch.no_grad():
                     y_pred_perturb = float(
-                        torch.nn.Softmax()(
+                        torch.nn.Softmax(dim=1)(
                             model(
                                 torch.Tensor(x_perturbed)
                                 .reshape(
@@ -1617,7 +1617,7 @@ class SensitivityN(Metric):
             # Predict on x.
             with torch.no_grad():
                 y_pred = float(
-                    torch.nn.Softmax()(
+                    torch.nn.Softmax(dim=1)(
                         model(
                             torch.Tensor(x)
                             .reshape(1, self.nr_channels, self.img_size, self.img_size)
@@ -1654,7 +1654,7 @@ class SensitivityN(Metric):
 
                     with torch.no_grad():
                         y_pred_perturb = float(
-                            torch.nn.Softmax()(
+                            torch.nn.Softmax(dim=1)(
                                 model(
                                     torch.Tensor(x_perturbed)
                                     .reshape(
@@ -1826,7 +1826,7 @@ class IROF(Metric):
             # Predict on x.
             with torch.no_grad():
                 y_pred = float(
-                    torch.nn.Softmax()(
+                    torch.nn.Softmax(dim=1)(
                         model(
                             torch.Tensor(x)
                             .reshape(1, self.nr_channels, self.img_size, self.img_size)
@@ -1865,7 +1865,7 @@ class IROF(Metric):
                 # Predict on perturbed input x.
                 with torch.no_grad():
                     y_pred_perturb = float(
-                        torch.nn.Softmax()(
+                        torch.nn.Softmax(dim=1)(
                             model(
                                 torch.Tensor(x_perturbed)
                                 .reshape(
