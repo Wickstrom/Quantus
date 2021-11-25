@@ -1884,7 +1884,7 @@ class IROF(Metric):
 
         self.last_results = [np.mean(self.last_results)]
 
-        self.all_results.append(self.last_results)
+        self.all_results.append(self.last_results[-1])
 
         return self.last_results
 
