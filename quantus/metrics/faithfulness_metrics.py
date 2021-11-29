@@ -714,7 +714,7 @@ class MonotonicityNguyen(Metric):
             **kwargs,
             **{k: v for k, v in self.__dict__.items() if k not in ["args", "kwargs"]},
         }
-        self.last_result = []
+        self.last_results = []
 
         if a_batch is None:
 
