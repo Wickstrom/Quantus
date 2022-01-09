@@ -127,9 +127,9 @@ class PointingGame(Metric):
 
         for sample, (x, y, a, s) in enumerate(zip(x_batch, y_batch, a_batch, s_batch)):
 
-            # Removed dummy dimension.
-            a = a.squeeze()
-            s = s.squeeze().astype(bool)        
+            # Reshape.
+            a = a.flatten()
+            s = s.squeeze().flatten().astype(bool)
 
             if self.abs:
                 a = np.abs(a)
@@ -137,17 +137,18 @@ class PointingGame(Metric):
             if self.normalise:
                 a = self.normalise_func(a)
 
-            # Find all maximum points, there might be several.
-            max_idxs = np.argwhere(a == np.amax(a))
-            # Pick out one of the maximum points randomly.
-            max_idx_h, max_idx_w = tuple(max_idxs[np.random.randint(0, len(max_idxs), size=(1,))[0]])
+            # Find index of max value.
+            max_index = np.where(a == np.max(a))[0]
 
-            # Check value of mask at maximum point. Either 0 or 1.
-            hit = s[max_idx_h, max_idx_w]
+            # Check if maximum of explanation is on target object class.
+            if len(max_index) > 1:
+                hit = False
+                for pixel in max_index:
+                    hit = hit or s[pixel]
+            else:
+                hit = bool(s[max_index])
 
             self.last_results.append(hit)
-
-            # Ratio = np.sum(binary_mask) / float(binary_mask.shape[0] * binary_mask.shape[1])
 
         self.all_results.append(self.last_results)
 
